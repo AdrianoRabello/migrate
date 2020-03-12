@@ -13,76 +13,49 @@
   <div class="container-fluid ">
 
     <div class="row">
-    <div class="col-md-12">
-      <h1>Migrate</h1>
+      <div class="col-md-12">
+        <h1>Migrate</h1>
+      </div>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
 
-    <div class="col-md-12 text-left ml-5">
+    <div class="col-md-8 "> 
 
-    <code>
+    <div class="card">
+      <div class="card-header">
+      <h6 class="text-center">Valores</h6>
+      </div>
+      <div class="card-header">
+      
+      <code>
+     
     
     <?php 
       
       include '../php/database/class/autoload.php';
-      include '../php/domain/Unidade.php';
-      include '../php/domain/Author.php';
-      include '../php/domain/Objeto.php';
-     
-
-      
+      include '../php/domain/Atendimento.php';    
+      include '../php/domain/Unidade.php';    
     
-      $con = Transaction::open('sisaqua');      
-      $object = new Unidade();
-
-
+    
+      $con = Transaction::open('db');      
       //var_dump($object->loadById(1));
 
       $criteria = new Criteria( new Filter('1','=','1'));
       $repository = new Repository('Unidade');
+      $results = $repository->load($criteria);
 
-      $unidades = $repository->load($criteria);
-
-      foreach($unidades as $value => $key){
-        $unidade = new Unidade();
-        $unidade->title = $key->nomeUnidade;
-        //$unidade->request("http://localhost:8012/books");
-
-        $author = new Author();
-        $author->nome = "Adriano";
-      //$author->post("http://portal.cb.es.gov.br/email-service/email");
-       
+      foreach ($results as $key => $value) {
+      print_r($value);
       }
-
-
-      
-      foreach($unidades as $key => $value){
-
-
-        //print_r($value);
-        //print_r($key);
-        //echo $value->get.lcfirst($key);
-        //echo($key->get.lcfirst($value));
-      //$author->post("http://portal.cb.es.gov.br/email-service/email");
-       
-      }
-
-      $obj = new Objeto();
-      $obj->id = 3;
-      $obj->get("http://localhost:8012/author");
-
-      
-
-      //var_dump($unidades);
-
-      //$unidade->request();
-
-      //Repository::showTables();
-
     ?>
-
     </code>
+
+      </div>
+    </div>  
+   
+
+    
     </div>
 
 

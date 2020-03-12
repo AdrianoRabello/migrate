@@ -10,4 +10,8 @@ class Unidade extends Record{
 
   }
 
+  function getIdUndiade(){
+    return $this->data->idUnidade;
+  }
+
 }
