@@ -1,9 +1,9 @@
 
 <?php
 
-class Unidade extends Record{
+class Obm extends Record{
 
-  const TABLENAME = 'unidade';
+  const TABLENAME = 'obm';
   function __construct(){
 
     //echo "teste";
@@ -14,13 +14,17 @@ class Unidade extends Record{
 
     $con = Transaction::open('db');   
     $criteria = new Criteria( new Filter('1','=','1'));
-    $repository = new Repository('Unidade');
+    $repository = new Repository('Obm');
     $results = $repository->load($criteria);
 
     foreach ($results as $key => $value) {    
       $objeto = new Objeto();
-      $objeto->nome = $value->nomeUnidade;
-     $objeto->post("http://localhost:8012/unidades");
+      $objeto->idAntigo             = $value->id;
+      $objeto->nome                 = $value->nome;
+      $objeto->novoId               = $value->NOVO_ID;   
+      //$objeo->aplicador             = [[]];
+  
+      $objeto->post("http://localhost:8012/saaf/migrate/obm");
       
     }
   }
@@ -29,9 +33,8 @@ class Unidade extends Record{
 
     $con = Transaction::open('db');   
     $criteria = new Criteria( new Filter('1','=','1'));
-    $repository = new Repository('Unidade');
-    $response = $repository->load($criteria);
-    
+    $repository = new Repository('Obm');
+    $response = $repository->load($criteria);    
     print_r($response);
   }
 

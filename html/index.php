@@ -26,30 +26,50 @@
       <div class="card-header">
       <h6 class="text-center">Valores</h6>
       </div>
-      <div class="card-header">
-      
-      <code>
+      <div class="card-body">
+      <dvi class="row">
+        <div class="col-md-12">
+        <pre>
      
     
-    <?php 
+          <?php 
+            
+            include "../php/database/class/autoload.php";
+            include '../php/domain/Objeto.php';
+           
+            include '../php/domain/PostGrad.php';
+            include '../php/domain/Obm.php';
+            include '../php/domain/Pessoa.php';  
+            include '../php/domain/Modalidade.php';  
+            include '../php/domain/TipoTaf.php';  
+            include '../php/domain/Taf.php';  
+            include '../php/domain/VersaoTabela.php';  
+                
+          
+          
+            /*PostGrad::migrate();
+            Obm::migrate();    
+            Pessoa::migrate(); 
+            Modalidade::migrate(); 
+            TipoTAf::migrate();             
+            VersaoTabela::migrate();
+            Taf::migrate(); */
+              
+         
+            //PostGrad::show();
+            //Pessoa::show();
+           // PostGrad::show();  
+           //Obm::show();
+           //Modalidade::show();
+            //TipoTAf::show();           
+            //VersaoTabela::show();
+            Taf::show();
+          ?>
+        </pre>
+        </div>
+      </dvi>
       
-      include '../php/database/class/autoload.php';
-      include '../php/domain/Atendimento.php';    
-      include '../php/domain/Unidade.php';    
-    
-    
-      $con = Transaction::open('db');      
-      //var_dump($object->loadById(1));
 
-      $criteria = new Criteria( new Filter('1','=','1'));
-      $repository = new Repository('Unidade');
-      $results = $repository->load($criteria);
-
-      foreach ($results as $key => $value) {
-      print_r($value);
-      }
-    ?>
-    </code>
 
       </div>
     </div>  

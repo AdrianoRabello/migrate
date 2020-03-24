@@ -1,5 +1,6 @@
 <?php
 
+  require "autoload.php";
   final class Connection{
 
 
@@ -24,8 +25,8 @@
 
        switch ($type) {
          case 'pgsql':
-           $port = $port ? $port : '5432';
-            $con = new PDO("pgsql:dbdane={$name}; user={$user}; password={$pass}; host ={$host}; port={$port};");
+            $port = $port ? $port : '5432';
+            $con = new PDO("pgsql:dbname={$name};user={$user};password={$pass};host ={$host};port={$port};");           
            break;
 
          case 'mysql':

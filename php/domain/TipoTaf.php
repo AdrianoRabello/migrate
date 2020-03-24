@@ -1,9 +1,9 @@
 
 <?php
 
-class Unidade extends Record{
+class TipoTaf extends Record{
 
-  const TABLENAME = 'unidade';
+  const TABLENAME = 'tipotaf';
   function __construct(){
 
     //echo "teste";
@@ -14,22 +14,31 @@ class Unidade extends Record{
 
     $con = Transaction::open('db');   
     $criteria = new Criteria( new Filter('1','=','1'));
-    $repository = new Repository('Unidade');
+    $repository = new Repository('TipoTaf');
     $results = $repository->load($criteria);
 
     foreach ($results as $key => $value) {    
       $objeto = new Objeto();
-      $objeto->nome = $value->nomeUnidade;
-     $objeto->post("http://localhost:8012/unidades");
+      //$objeto->descricao = $value->idPosto;
+      $objeto->idAntigo     = $value->id;
+      $objeto->ativo        = $value->ativo;
+      $objeto->descricao    = $value->descricao;
+ 
+
+     //print_r($objeto);
+
+     $objeto->post("http://localhost:8012/saaf/migrate/tipotaf");
       
     }
+
+   
   }
 
   public static function show(){
 
     $con = Transaction::open('db');   
     $criteria = new Criteria( new Filter('1','=','1'));
-    $repository = new Repository('Unidade');
+    $repository = new Repository('TipoTaf');
     $response = $repository->load($criteria);
     
     print_r($response);

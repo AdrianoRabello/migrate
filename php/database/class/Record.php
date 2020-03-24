@@ -206,6 +206,21 @@
 			return $ar->load($id);
 		}
 
+		public function findById($url){  
+			$ch = curl_init();    
+			curl_setopt($ch,CURLOPT_URL, $url);   
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			  'Content-Type: application/json',      
+			  ));      
+		  
+			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);   
+			$result = curl_exec($ch);
+
+			//echo $result;
+			return $result;
+			//echo $result;
+		  }
+
 		// serve para retornar o ultimo id do BD
 		private function getLast(){
 			if ($con = Transaction::get()) {
@@ -266,6 +281,8 @@
    
 
     public function post($url){
+
+		//$token = " Breare eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZHJpYW5vLnJhYmVsbG8iLCJ1c3VhcmlvIjp7ImlkIjoiMTYiLCJub21lIjoiQURSSUFOTyBST0RSSUdVRVMgUkFCRUxMTyIsInBvc3RvR3JhZHVhY2FvIjoiQ0IgQk0iLCJvZmljaWFsIjoiTiIsIm5vbWVHdWVycmEiOiJSQUJFTExPIiwibnVtZXJvRnVuY2lvbmFsIjoiMzM2ODg0MCIsImNwZiI6IjEyMDU1NjczNzI2IiwiZW1haWwiOiJhZHJpYW5vci5yYWJlbGxvQGhvdG1haWwuY29tIiwibG9jYWlzIjp7ImxvY2FsUW8iOnsiaWQiOjEwMSwic2lnbGEiOiJEQUwiLCJub21lIjoiRElSRVRPUklBIERFIEFQT0lPIExPR8ONU1RJQ08ifSwibG9jYWxRZGkiOnsiaWQiOjEzMSwic2lnbGEiOiJHVEkiLCJub21lIjoiR0VSw4pOQ0lBIERFIFRFQ05PTE9HSUEgREEgSU5GT1JNQcOHw4NPIGRhIERBTCJ9LCJsb2NhbEFkaWRvIjoiIn19LCJyb2xlc0ludHJhbmV0IjpbIkdHX2ludHJhbmV0X2FkbWluIiwiR0dfaW50cmFuZXRfY2JtZXMiLCJHR19pbnRyYW5ldF9jcmlhck5vdGljaWEiLCJHR19pbnRyYW5ldF9ibTYiLCJHR19pbnRyYW5ldF9kYWwuZ3RpIiwiR0dfaW50cmFuZXRfZGFsIiwiR0dfaW50cmFuZXRfZW1nIiwiR0dfaW50cmFuZXRfY2JtZXMiLCJHR19pbnRyYW5ldF9jcmlhckFycXVpdm9zIl0sInJvbGVzIjpbIlNBRk9fR2VyYWxSSCIsIlNJR09fVXN1YXJpbyIsIk1BTlVBRF9BZG1pbmlzdHJhZG9yIiwiQWRtaW5pc3RyYWRvciIsIlNBQUZfQWRtaW5pc3RyYWRvciIsIlNJR09fQWRtaW5pc3RyYWRvciIsIlNBRk9fQ2FkYXN0cm9PQk0iLCJBcmVhVGVjbmljYSIsIlNBRk9fQ2FkYXN0cm9SSCIsIlNBRk9fQWRtaW5pc3RyYWRvciIsIlNBRk9fVXN1YXJpbyIsIlNBRk9fR2VyZW5jaWFSSCIsIlNBRk9fQ2hlZmlhT0JNIl0sImV4cCI6MTU4NDA1MDg0MX0.8Ctr5Oxo-SvfmwnK1CKmenbsZPQ2bK2zTPlGokIalnQH4-E6JRExTweyfdc3AXzDhgELyjE8AmutzoEwTPx8-A";
       
       $ch = curl_init();
       
@@ -274,8 +291,8 @@
       curl_setopt($ch,CURLOPT_POST, true);
       curl_setopt($ch,CURLOPT_POSTFIELDS, json_encode($this->data));
       curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',      
-        ));
+		'Content-Type: application/json'
+	));
       
       //So that curl_exec returns the contents of the cURL; rather than echoing it
       curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
@@ -283,7 +300,8 @@
       //execute post
       $result = curl_exec($ch);
 
-      echo $result;
+	  echo $result;
+	  echo "<br>";
     }
 
 
@@ -293,7 +311,8 @@
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
       curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',      
+		'Content-Type: application/json',  
+		   
         ));  
       curl_setopt($ch, CURLOPT_POSTFIELDS,json_encode($this->data));
       $response = curl_exec($ch);      
